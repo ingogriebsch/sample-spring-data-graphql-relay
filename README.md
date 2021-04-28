@@ -12,7 +12,7 @@ This sample shows you how to implement a GraphQL relay in a Spring Data environm
 ## How to build and run
 If you want to see the implementation in action, simply follow these steps:
 
-*   First, make sure that you have Java 8 or later installed and an established Internet connection.
+*   First, make sure that you have Java 11 or later installed and an established Internet connection.
 *   Then, clone this Git repository an `cd` into the project folder. 
 *   Now invoke `./mvnw spring-boot:run` and wait a moment.
 
