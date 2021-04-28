@@ -16,7 +16,6 @@
 package de.ingogriebsch.sample.spring.data.graphql.relay;
 
 import graphql.kickstart.tools.GraphQLQueryResolver;
-import graphql.relay.Connection;
 import graphql.schema.DataFetchingEnvironment;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

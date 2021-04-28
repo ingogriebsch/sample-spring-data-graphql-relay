@@ -22,7 +22,6 @@ import static graphql.com.google.common.collect.Lists.newArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import graphql.relay.Connection;
 import graphql.relay.ConnectionCursor;
 import graphql.relay.DefaultConnectionCursor;
 import graphql.relay.DefaultEdge;
@@ -78,6 +77,16 @@ class SimplePageConnection<T> implements Connection<T> {
             page.hasPrevious(), //
             page.hasNext() //
         );
+    }
+
+    @Override
+    public List<T> getNodes() {
+        return page.getContent();
+    }
+
+    @Override
+    public Long getTotalCount() {
+        return page.getTotalElements();
     }
 
     private Edge<T> edge(T node, Long offset) {
