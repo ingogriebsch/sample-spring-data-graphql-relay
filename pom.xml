@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -11,9 +9,11 @@
         <!-- lookup parent from repository -->
         <relativePath />
     </parent>
+
     <groupId>de.ingogriebsch.samples</groupId>
     <artifactId>sample-spring-data-graphql-relay</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+
     <name>Sample Spring Data GraphQL Relay</name>
     <description>This sample shows you how to implement a GraphQL relay in a Spring Data environment</description>
     <url>https://github.com/ingogriebsch/sample-spring-data-graphql-relay</url>
@@ -29,6 +29,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
     <developers>
         <developer>
             <id>ingogriebsch</id>
@@ -38,6 +39,7 @@
             <timezone>Europe/Berlin</timezone>
         </developer>
     </developers>
+
     <scm>
         <connection>scm:git:git://github.com/ingogriebsch/sample-spring-data-graphql-relay.git</connection>
         <developerConnection>scm:git:git://github.com/ingogriebsch/sample-spring-data-graphql-relay.git</developerConnection>
@@ -47,11 +49,13 @@
         <url>https://github.com/ingogriebsch/sample-spring-data-graphql-relay/issues</url>
         <system>GitHub</system>
     </issueManagement>
+
     <properties>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -114,6 +118,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -261,6 +266,7 @@
             </plugin>
         </plugins>
     </build>
+
     <profiles>
         <profile><!-- https://stackoverflow.com/questions/7905501/get-rid-of-pom-not-found-warning-for-org-eclipse-m2elifecycle-mapping -->
             <id>eclipse</id>
