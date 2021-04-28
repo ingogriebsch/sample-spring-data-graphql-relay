@@ -1,0 +1,9 @@
+type Query {
+    persons(first: Int, after: String): PersonsConnection! @connection(for: "Person")
+}
+
+type Person {
+    id: ID!
+    name: String!
+    age: Int!
+}
