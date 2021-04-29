@@ -16,11 +16,9 @@
 package de.ingogriebsch.sample.spring.data.graphql.relay;
 
 import graphql.kickstart.tools.GraphQLQueryResolver;
-import graphql.relay.Connection;
 import graphql.schema.DataFetchingEnvironment;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -40,15 +38,16 @@ class PersonResolver implements GraphQLQueryResolver {
         // if cursor is not null but first the client wants to have all remaining persons from a specific position (not allowed)!
         // if first and cursor are not null the client wants to have the x persons from a specific position.
 
-        int page;
-        if (cursor != null) {
-            Long offset = Cursor.decode(cursor).getOffset();
-            page = (int) (offset / first + 1);
-        } else {
-            page = 0;
-        }
+        return new SimplePageConnection<>(personRepository.findAll(pageable(first, cursor)), pageable(first, cursor));
+    }
 
-        Pageable pageable = PageRequest.of(page, first);
-        return new SimplePageConnection<>(personRepository.findAll(pageable), pageable);
+    private static Pageable pageable(Integer first, String cursor) {
+        Long offset;
+        if (cursor != null) {
+            offset = Cursor.decode(cursor).getOffset() + 1;
+        } else {
+            offset = 0L;
+        }
+        return OffsetRequest.of(offset, first);
     }
 }

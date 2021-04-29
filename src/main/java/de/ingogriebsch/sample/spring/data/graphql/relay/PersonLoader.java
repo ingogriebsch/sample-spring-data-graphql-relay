@@ -17,12 +17,10 @@ package de.ingogriebsch.sample.spring.data.graphql.relay;
 
 import static java.lang.String.valueOf;
 
-import static graphql.com.google.common.collect.Lists.newArrayList;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -31,22 +29,25 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
+@Slf4j
 class PersonLoader implements CommandLineRunner {
 
     private static final String[] forenames =
-        new String[] { "Max", "Paul", "Peter", "Sira", "Leonhard", "Ingo", "Steve", "Yago", "Christian" };
-    private static final String[] surnames =
-        new String[] { "Lopez", "Mustermann", "Poster", "Fonda", "Gabriel", "Müller", "Meyer", "Hawking" };
+        new String[] { "Max", "Paul", "Peter", "Sira", "Leonhard", "Ingo", "Steve", "Yago", "Christian", "Jan", "Pablo", "Alex",
+            "Alexandre", "David", "Elias", "Eloy", "Emanuele", "Fabio", "Francisco", "Frederik", "Lukas", "Mohamed" };
+    private static final String[] surnames = new String[] { "Lopez", "Mustermann", "Poster", "Fonda", "Gabriel", "Müller",
+        "Meyer", "Hawking", "Grünig", "Rhazi", "Videira", "Iglesias", "Castelo", "Otero", "Hermann" };
 
     private final PersonRepository personRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        List<Person> persons = newArrayList();
-        for (int i = 0; i < 10; i++) {
-            persons.add(person(valueOf(i), name(), age()));
+        int count = 10000;
+        log.info("Loading {} persons into the database...", count);
+        for (int i = 0; i < count; i++) {
+            personRepository.save(person(valueOf(i), name(), age()));
         }
-        persons.forEach(personRepository::save);
+        log.info("Loading done!", count);
     }
 
     private static Person person(String id, String name, Integer age) {
