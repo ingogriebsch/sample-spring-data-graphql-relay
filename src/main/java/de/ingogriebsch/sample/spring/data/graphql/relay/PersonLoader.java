@@ -42,7 +42,7 @@ class PersonLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        int count = 10000;
+        int count = 10;
         log.info("Loading {} persons into the database...", count);
         for (int i = 0; i < count; i++) {
             personRepository.save(person(valueOf(i), name(), age()));
