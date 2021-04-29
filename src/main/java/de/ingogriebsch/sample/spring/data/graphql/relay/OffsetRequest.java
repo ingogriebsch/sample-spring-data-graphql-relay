@@ -15,6 +15,12 @@
  */
 package de.ingogriebsch.sample.spring.data.graphql.relay;
 
+import static java.lang.Math.max;
+
+import static lombok.AccessLevel.PRIVATE;
+
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +29,8 @@ import org.springframework.data.domain.Sort;
 /**
  * A {@link Pageable} implementation that allows to request a {@link Page} based on an offset and a size.
  */
-@Value(staticConstructor = "of")
+@RequiredArgsConstructor(access = PRIVATE)
+@Value
 class OffsetRequest implements Pageable {
 
     Long offset;
@@ -34,10 +41,19 @@ class OffsetRequest implements Pageable {
         return of(offset, size, Sort.unsorted());
     }
 
+    static OffsetRequest of(@NonNull Long offset, @NonNull Integer size, @NonNull Sort sort) {
+        if (offset < 0) {
+            throw new IllegalArgumentException("Property 'offset' must be greater than or equal to 0");
+        }
+        if (size < 1) {
+            throw new IllegalArgumentException("Property 'size' must be greater than or equal to 1");
+        }
+        return new OffsetRequest(offset, size, sort);
+    }
+
     @Override
     public int getPageNumber() {
-        // FIXME how to do it right?
-        return (int) (offset / size + offset % size);
+        return (int) (offset / size) + (offset % size > 0 ? 1 : 0);
     }
 
     @Override
@@ -55,27 +71,27 @@ class OffsetRequest implements Pageable {
         return sort;
     }
 
+    public Pageable previous() {
+        return hasPrevious() ? OffsetRequest.of(max(getOffset() - getPageSize(), 0), getPageSize()) : this;
+    }
+
     @Override
     public Pageable next() {
-        // FIXME implement me... :)
-        return null;
+        return OffsetRequest.of(getOffset() + getPageSize(), getPageSize());
     }
 
     @Override
     public Pageable previousOrFirst() {
-        // FIXME implement me... :)
-        return null;
+        return hasPrevious() ? previous() : first();
     }
 
     @Override
     public Pageable first() {
-        // FIXME implement me... :)
-        return null;
+        return OffsetRequest.of(0L, getPageSize());
     }
 
     @Override
     public boolean hasPrevious() {
         return offset > 0;
     }
-
 }
