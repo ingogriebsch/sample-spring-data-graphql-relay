@@ -15,15 +15,14 @@
  */
 package de.ingogriebsch.sample.spring.data.graphql.relay;
 
-import javax.persistence.Entity;
-
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 /**
- * A {@link Repository} declaration that allows to manage {@link Entity entities} of type {@link Person}.
+ * An extension to {@link graphql.relay.Connection} that provides additional information and a shortcut to the target nodes.
  */
-@Repository
-interface PersonRepository extends PagingAndSortingRepository<Person, String>, JpaSpecificationExecutor<Person> {
+interface Connection<T> extends graphql.relay.Connection<T> {
+
+    List<T> getNodes();
+
+    Long getTotalCount();
 }

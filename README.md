@@ -12,7 +12,7 @@ This sample shows you how to implement a GraphQL relay in a Spring Data environm
 ## How to build and run
 If you want to see the implementation in action, simply follow these steps:
 
-*   First, make sure that you have Java 8 or later installed and an established Internet connection.
+*   First, make sure that you have Java 11 or later installed and an established Internet connection.
 *   Then, clone this Git repository an `cd` into the project folder. 
 *   Now invoke `./mvnw spring-boot:run` and wait a moment.
 
@@ -29,6 +29,11 @@ There are more, but they are not that present inside the main use case, therefor
 
 *   [GraphQL Java Kickstart](https://www.graphql-java-kickstart.com/)
 *   [Spring Data JPA](https://docs.spring.io/spring-data/jpa/docs/2.4.2/reference/html/)
+
+## Additional guides
+The following guides illustrate how to implement this and related use cases.
+
+* [Limit and Offset with Spring Data JPA Repositories](https://blog.felix-seifert.com/limit-and-offset-spring-data-jpa-repositories/#)
 
 ## License
 This code is open source software licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.html).
